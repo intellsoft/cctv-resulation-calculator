@@ -1,8 +1,13 @@
 <?php
 /*
+ * M.Ali.Abbaspor
+ * Desc: calculate cctv resulation
+ *
+ * https:;//intellsoft.ir/
  *
  *
  */
+
 
 // Generate form token
 session_start();
