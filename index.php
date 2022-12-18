@@ -21,10 +21,10 @@ $token = $_SESSION['token'];
 
 if (isset($_POST['submit']))
 {
-    $token = filter_input(INPUT_POST, 'token');
-    $token = htmlspecialchars($token);
+    $InputToken = filter_input(INPUT_POST, 'token');
+    $InputToken = htmlspecialchars($InputToken);
 
-    if (!$token || $token !== $_SESSION['token']) {
+    if (!$InputToken || $InputToken !== $_SESSION['token']) {
         // return 405 http status code
         header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
         exit;
