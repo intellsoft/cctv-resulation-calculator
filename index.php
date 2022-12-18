@@ -17,8 +17,19 @@ if (empty($_SESSION['token'])) {
 $token = $_SESSION['token'];
 
 
+
+
 if (isset($_POST['submit']))
 {
+    $token = filter_input(INPUT_POST, 'token');
+    $token = htmlspecialchars($token);
+
+    if (!$token || $token !== $_SESSION['token']) {
+        // return 405 http status code
+        header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+        exit;
+    }
+
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -34,12 +45,7 @@ $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
         $uploadOk = 0;
     }
 
-    if(isset($_GET['token'])) {
-        if ($_GET['token'] != $_SESSION['token']) {
-            echo "خطا در کد اعتبار سنجی فرم اتفاق افتاده است.";
-            $uploadOk = 0;
-        }
-    }
+
 
 // Check if file already exists
 if (file_exists($target_file)) {
